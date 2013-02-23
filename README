@@ -1,0 +1,7 @@
+This is a Gauche port of the source code in Conrad Barski's "Land of Lisp".
+The purpose is to let Gauche users play with the ideas in this fun book
+and extend them.  I used Gauche-specific idioms rather freely, so it
+won't run on other Scheme without tweaks.
+
+Conrad told me that he put original code Public Domain.  I follow him,
+so all the code here is Public Domain.
