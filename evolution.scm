@@ -71,12 +71,11 @@
                                     (animal-y animal)
                                     (animal-energy animal)
                                     (animal-dir animal)
-                                    (animal-genes animal))]
-            [genes     (list-copy (animal-genes animal))]
+                                    (list-copy
+                                     (animal-genes animal)))]
             [mutation  (random-integer 8)])
-        (set! (~ genes mutation)
-              (max 1 (+ (~ genes mutation) (random-integer 3) -1)))
-        (set! (animal-genes animal-nu) genes)
+        (update! (~ animal-nu 'genes mutation)
+                 (^v (max 1 (+ v (random-integer 3) -1))))
         (push! *animals* animal-nu)))))
 
 (define (update-world)
