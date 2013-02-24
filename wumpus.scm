@@ -106,10 +106,9 @@
                            [(any (cut within-one n <> edge-alist) glow-worms)
                             '(lights!)]
                            [else '()])
-                     (if (any (^e (not (null? (cdr e))))
-                              (assv-ref edge-alist n '()))
-                       '(sirens!)
-                       '())))))
+                     (cond-list [(any (^e (not (null? (cdr e))))
+                                      (assv-ref edge-alist n '()))
+                                 'sirens!])))))
 
 #|
 ;; provisional version.  see below.
