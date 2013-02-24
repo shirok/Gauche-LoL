@@ -1,5 +1,5 @@
-;; The features implemented in lazy.scm is available in Gauche as
-;; util.stream.  Here we only show
+;; The features implemented in lazy.lisp is available in Gauche as
+;; util.stream.  Here we only show the correspondence.
 
 (use util.stream)
 
