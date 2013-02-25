@@ -28,7 +28,6 @@
 ;; Returns (path header params) or #f
 (define (parse-request iport)
   (rxmatch-case (read-line iport)
-    [test eof-object? #f]               ;empty request
     [#/^(GET|POST)\s+(\S+)\s+HTTP\/\d+\.\d+$/ (_ meth abs-path)
      (receive (scheme info host port path query frag) (uri-parse abs-path)
        (let* ([hdrs (map (^p (cons (string->symbol (car p))
