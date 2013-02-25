@@ -5,3 +5,44 @@ won't run on other Scheme without tweaks.
 
 Conrad told me that he put original code Public Domain.  I follow him,
 so all the code here is Public Domain.
+
+
+guess.scm         (ch2) Let the computer guess the number.
+
+wizards_game.scm  (ch5,6) Simple text adventure.
+
+graph-util.scm    (ch7) Create png graphs (requires external program.
+                        make sure you have graphviz installed.)
+
+wumpus.scm        (ch8) Grand Theft Wumpus!
+
+orc-battle.scm    (ch9) Battle against a bunch of monsters.
+
+evolution.scm     (ch10) Simulate evolution.
+evolution-color.scm      A bonus---shows gene variation using ANSI terminal
+                         color.
+
+robots.scm        (ch11) Flee from robots.
+
+webserver.scm     (ch13) Simple web server (This isn't based on the book's
+                         code.  I'd rather take advantage of Gauche libraries.)
+
+dice_of_doom_v1.scm (ch15) Dice of Doom, version 1.
+
+svg.scm           (ch17) DSL to generate SVG.
+
+wizard_special_action.scm (ch17) Complete the Wizard adventure.
+
+lazy.scm          (ch18) All the features needed for lazy library is already
+                         in Gauche.  This file merely shows the correspondence.
+
+dice_of_doom_v2.scm (ch18) Improving Dice of Doom
+dice_of_doom_v3.scm (ch19) ditto
+dice_of_doom_v4.scm (ch20) ditto
+
+
+
+
+
+
+
