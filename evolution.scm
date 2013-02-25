@@ -1,3 +1,4 @@
+(use srfi-1)  ; list-tabulate
 (use srfi-27) ; random-integer
 (use srfi-42) ; list-ec
 (use gauche.record)
