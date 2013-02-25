@@ -25,25 +25,26 @@
                      (ash *height* -1)
                      1000
                      0
-                     (list-ec (: i 8) (+ 1 (random-integer 10))))))
+                     (list-tabulate 8 (^_ (+ 1 (random-integer 10)))))))
 
 (define (move animal)
   (let ([dir (animal-dir animal)]
         [x (animal-x animal)]
         [y (animal-y animal)])
-    (set! (animal-x animal) (mod (+ x
-                                    (cond [(and (>= dir 2) (< dir 5)) 1]
-                                          [(or (= dir 1) (= dir 5)) 0]
-                                          [else -1])
-                                    *width*)
-                                 *width*))
-    (set! (animal-y animal) (mod (+ y
-                                    (cond [(and (>= dir 0) (< dir 3)) -1]
-                                          [(and (>= dir 4) (< dir 7)) 1]
-                                          [else 0])
-                                    *height*)
-                                 *height*))
-    (dec! (animal-energy animal))))
+    (set! (animal-x animal) (modulo (+ x
+                                       (cond [(and (>= dir 2) (< dir 5)) 1]
+                                             [(or (= dir 1) (= dir 5)) 0]
+                                             [else -1])
+                                       *width*)
+                                    *width*))
+    (set! (animal-y animal) (modulo (+ y
+                                       (cond [(and (>= dir 0) (< dir 3)) -1]
+                                             [(and (>= dir 4) (< dir 7)) 1]
+                                             [else 0])
+                                       *height*)
+                                    *height*))
+    (dec! (animal-energy animal))
+    ))
 
 (define (turn animal)
   (let1 x (random-integer (apply + (animal-genes animal)))
@@ -53,7 +54,7 @@
           0
           (+ 1 (angle (cdr genes) xnu)))))
     (set! (animal-dir animal)
-          (mod (+ (animal-dir animal) (angle (animal-genes animal) x)) 8))))
+          (modulo (+ (animal-dir animal) (angle (animal-genes animal) x)) 8))))
 
 (define (eat animal)
   (let1 pos (cons (animal-x animal) (animal-y animal))
@@ -79,8 +80,8 @@
         (push! *animals* animal-nu)))))
 
 (define (update-world)
-  (set! *animals* (remove (^[animal] (<= (animal-energy animal) 0))
-                          *animals*))
+  (set! *animals* (remove! (^[animal] (<= (animal-energy animal) 0))
+                           *animals*))
   (dolist [animal *animals*]
     (turn animal)
     (move animal)
@@ -111,7 +112,7 @@
         (if-let1 x (string->number str)
           (dotimes [i x]
             (update-world)
-            (when (zero? (mod i 1000))
+            (when (zero? (modulo i 1000))
               (display #\.) (flush)))
           (update-world))
         (loop)))))
