@@ -72,9 +72,10 @@
       (game-repl))))
 
 (define (game-read)
-  ;; Gauche specific - Gauche's REPL reader doesn't consume the newline after
-  ;; the input, so (game-read) immediately after invoking (game-repl) reads
-  ;; the empty input.  We detect the case and keep reading.
+  ;; Gauche specific - Gauche's REPL reader (up to 0.9.4) doesn't consume
+  ;; the newline after the input, so (game-read) immediately after invoking
+  ;; (game-repl) reads the empty input, making cmd an empty list.  We just
+  ;; loop in that case.  This issue is addressed in 0.9.5.
   (let1 cmd (read-from-string (string-append "(" (read-line) ")"))
     (define (quote-it x)
       (list 'quote x))
