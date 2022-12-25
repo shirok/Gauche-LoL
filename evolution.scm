@@ -1,7 +1,7 @@
-(use srfi-1)  ; list-tabulate
-(use srfi-27) ; random-integer
-(use srfi-42) ; list-ec
 (use gauche.record)
+(use scheme.list)  ; list-tabulate
+(use srfi.27) ; random-integer
+(use srfi.42) ; list-ec
 
 (define *width* 100)
 (define *height* 30)
@@ -21,7 +21,7 @@
 
 (define-record-type animal #t #t (x) (y) (energy) (dir) (genes))
 
-(define *animals* 
+(define *animals*
   (list (make-animal (ash *width*  -1)
                      (ash *height* -1)
                      1000
@@ -117,5 +117,3 @@
               (display #\.) (flush)))
           (update-world))
         (loop)))))
-
-

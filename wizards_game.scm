@@ -1,4 +1,4 @@
-(use srfi-13)  ; string-trim-both
+(use srfi.13)  ; string-trim-both
 
 (define *nodes* '((living-room (you are in the living-room.
                                     a wizard is snoring loudly on the couch.))
@@ -10,7 +10,7 @@
 (define (describe-location location nodes)
   (cadr (assoc location nodes)))
 
-(define *edges* '((living-room (garden west door)  
+(define *edges* '((living-room (garden west door)
                                (attic upstairs ladder))
                   (garden (living-room east door))
                   (attic (living-room downstairs ladder))))
@@ -49,7 +49,7 @@
   (define (correct-way edge)
     (eq? (cadr edge) direction))
   (if-let1 next (find correct-way (cdr (assoc *location* *edges*)))
-    (begin (set! *location* (car next)) 
+    (begin (set! *location* (car next))
            (look))
     '(you cannot go that way.)))
 

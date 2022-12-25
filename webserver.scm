@@ -6,11 +6,11 @@
 ;;  (https://github.com/shirok/Gauche-makiki )
 
 (use gauche.net)
-(use srfi-13)     ; string-trim
-(use util.match)
 (use rfc.822)     ; rfc822-header->list
 (use rfc.uri)     ; uri-parse
+(use srfi.13)     ; string-trim
 (use text.parse)  ; read-string
+(use util.match)
 (use www.cgi)     ; cgi-parse-parameters
 
 (define (serve request-handler)

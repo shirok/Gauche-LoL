@@ -3,7 +3,7 @@
 
 (use gauche.sequence)
 
-(load "./evolution")
+(include "./evolution")
 
 ;; override draw-world
 (define (draw-world)

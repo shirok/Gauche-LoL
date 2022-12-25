@@ -1,8 +1,8 @@
-(use srfi-27) ; random-integer
-(use srfi-42) ; vector-ec
-(use srfi-43) ; vector-every
-(use gauche.sequence)
 (use gauche.record)
+(use gauche.sequence)
+(use srfi.27) ; random-integer
+(use srfi.42) ; vector-ec
+(use srfi.43) ; vector-every
 
 (define *player-health* 0)
 (define *player-agility* 0)
@@ -212,4 +212,3 @@ agility points! ")
           [(= x *player-strength*)
            (display "A brigand cuts your arm with his whip, taking off 2 strength points! ")
            (dec! *player-strength* 2)])))
-

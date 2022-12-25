@@ -26,4 +26,3 @@
 (test-file-binding dice_of_doom_v4)
 
 (test-end)
-

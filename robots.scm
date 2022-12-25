@@ -2,9 +2,9 @@
 ;; In Gauche we lose the wackiness of the original code to some extent,
 ;; unfortunately.
 
-(use srfi-1)
-(use srfi-27) ; random-integer
-(use srfi-42) ; This is sort of 'loop' equivalent in Scheme
+(use scheme.list)
+(use srfi.27) ; random-integer
+(use srfi.42) ; This is sort of 'loop' equivalent in Scheme
 (use util.match)
 
 (define (robots)
@@ -28,7 +28,7 @@
                                        (list-ec (: kd directions)
                                                 (match-let1 (k . d) kd
                                                   (let1 new-mpos (+ mpos d)
-                                                    (cons (+ (abs (- (mod new-mpos 64) 
+                                                    (cons (+ (abs (- (mod new-mpos 64)
                                                                      (mod pos 64)))
                                                              (abs (- (ash new-mpos -6)
                                                                      (ash pos -6))))

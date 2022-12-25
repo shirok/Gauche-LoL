@@ -1,4 +1,4 @@
-(use srfi-42)
+(use srfi.42)
 
 (load "./dice_of_doom_v1.scm")
 (load "./lazy.scm")
@@ -7,10 +7,10 @@
 (define *board-hexnum* (* *board-size* *board-size*))
 
 (define (add-passing-move board player spare-dice first-move moves)
-  (if first-move 
+  (if first-move
     moves
     (stream-cons (list #f
-                       (game-tree (add-new-dice board player 
+                       (game-tree (add-new-dice board player
                                                 (- spare-dice 1))
                                   (mod (+ player 1) *num-players*)
                                   0
@@ -28,7 +28,7 @@
          (stream-map
           (^[dst]
             (if (and (not (eq? (player dst)
-                               cur-player)) 
+                               cur-player))
                      (> (dice src) (dice dst)))
               (list->stream
                (list (list (list src dst)
@@ -77,12 +77,12 @@
 ;Now we start writing improvements for the AI...
 
 (define (limit-tree-depth tree depth)
-  (list (car tree) 
-	(cadr tree) 
-	(if (zero? depth)
+  (list (car tree)
+        (cadr tree)
+        (if (zero? depth)
           stream-null
-	  (stream-map (^[move]
-                        (list (car move) 
+          (stream-map (^[move]
+                        (list (car move)
                               (limit-tree-depth (cadr move) (- depth 1))))
                       (caddr tree)))))
 

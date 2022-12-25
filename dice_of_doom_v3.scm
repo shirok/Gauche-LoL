@@ -1,5 +1,5 @@
-(use srfi-42)
- 
+(use srfi.42)
+
 (load "./dice_of_doom_v2.scm")
 (load "./webserver.scm")
 (load "./svg.scm")
@@ -38,16 +38,16 @@
   (do-ec (: z 2)
          (polygon (map (^[pt]
                          (cons (+ xx (* *board-scale* (car pt)))
-                               (+ yy (* *board-scale* 
+                               (+ yy (* *board-scale*
                                         (+ (cdr pt) (* (- 1 z) 0.1))))))
-                       '((-1 . -0.2) (0 . -0.5) (1 . -0.2) 
+                       '((-1 . -0.2) (0 . -0.5) (1 . -0.2)
                          (1 . 0.2) (0 . 0.5) (-1 . 0.2)))
                   (if (eqv? pos chosen-tile)
                     (brightness col 100)
                     col)))
   (do-ec (: z (second hex))
          (draw-die-svg (+ xx
-                          (* *dice-scale* 
+                          (* *dice-scale*
                              0.3
                              (if (odd? (+ x y z))
                                -0.3
@@ -87,10 +87,10 @@
                   (when (or (not *cur-game-tree*) (not chosen))
                     (set! chosen #f)
                     (web-initialize))
-                  (cond [(stream-null? (caddr *cur-game-tree*)) 
+                  (cond [(stream-null? (caddr *cur-game-tree*))
                          (web-announce-winner (cadr *cur-game-tree*))]
-                        [(zero? (car *cur-game-tree*)) 
-                         (web-handle-human 
+                        [(zero? (car *cur-game-tree*))
+                         (web-handle-human
                           (if chosen
                             (read-from-string (cdr chosen))
                             #f))]
@@ -126,7 +126,7 @@
                                (display "Move cancelled.")]
         [else (set! *cur-game-tree*
                     (cadr (stream-find (^[move]
-                                         (equal? (car move) 
+                                         (equal? (car move)
                                                  (list *from-tile* pos)))
                                        (caddr *cur-game-tree*))))
               (set! *from-tile* #f)
@@ -143,10 +143,10 @@
         "window.setTimeout('window.location=\"game.html?chosen=nil\"',5000)")))
 
 (define (draw-dod-page tree selected-tile)
-  (svg *board-width* 
+  (svg *board-width*
        *board-height*
-       (draw-board-svg (cadr tree) 
-                       selected-tile 
+       (draw-board-svg (cadr tree)
+                       selected-tile
                        (stream->list
                         (if selected-tile
                           (stream-map (^[move]

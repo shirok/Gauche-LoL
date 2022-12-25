@@ -1,4 +1,4 @@
-(use srfi-13) ;string-downcase
+(use srfi.13) ;string-downcase
 
 
 ;; Gauche already has it
@@ -17,7 +17,7 @@
 
 (define (pairs lst)
   (define (f lst acc)
-    (split lst    
+    (split lst
            (if tail
              (f (cdr tail) (cons (cons head (car tail)) acc))
              (reverse acc))
@@ -42,16 +42,16 @@
           (print-tag ',name '() #t)))
 
 (define-macro (svg width height . body)
-  `(tag svg (xmlns "http://www.w3.org/2000/svg" 
+  `(tag svg (xmlns "http://www.w3.org/2000/svg"
                    "xmlns:xlink" "http://www.w3.org/1999/xlink"
                    height ,height width ,width)
-	,@body))
+        ,@body))
 
 (define (brightness col amt)
   (map (^x (min 255 (max 0 (+ x amt)))) col))
 
 (define (svg-style color)
-  (apply format "fill:rgb(~a,~a,~a);stroke:rgb(~a,~a,~a)" 
+  (apply format "fill:rgb(~a,~a,~a);stroke:rgb(~a,~a,~a)"
          (append color (brightness color -100))))
 
 (define (polygon points color)

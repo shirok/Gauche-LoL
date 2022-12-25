@@ -1,5 +1,5 @@
-(use srfi-27)
-(use srfi-42)
+(use srfi.27)
+(use srfi.42)
 
 (load "./dice_of_doom_v3.scm")
 
@@ -18,15 +18,15 @@
                    (stream-concatenate
                     (stream-map
                      (^[dst]
-                       (if (and (not (eq? (player dst) cur-player)) 
+                       (if (and (not (eq? (player dst) cur-player))
                                 (> (dice src) 1))
                         (list->stream (list (list (list src dst)
-                                                  (game-tree (board-attack board cur-player src dst (dice src)) 
-                                                             cur-player 
-                                                             (+ spare-dice (dice dst)) 
+                                                  (game-tree (board-attack board cur-player src dst (dice src))
+                                                             cur-player
+                                                             (+ spare-dice (dice dst))
                                                              #f)
                                                   (game-tree (board-attack-fail board cur-player src dst (dice src))
-                                                             cur-player 
+                                                             cur-player
                                                              (+ spare-dice (dice dst))
                                                              #f))))
                         stream-null))
@@ -77,7 +77,7 @@
 (define (handle-computer tree)
   (let1 ratings (get-ratings (limit-tree-depth tree *ai-level*) (car tree))
     (pick-chance-branch
-     (cadr tree) 
+     (cadr tree)
      (stream-ref (caddr tree)
                  (list-index (cute eq? (apply max ratings) <>) ratings)))))
 
@@ -106,8 +106,8 @@
                    (caddr tree)))))
 
 (define (limit-tree-depth tree depth)
-  (list (car tree) 
-        (cadr tree) 
+  (list (car tree)
+        (cadr tree)
         (if (zero? depth)
           stream-null
           (stream-map (^[move]

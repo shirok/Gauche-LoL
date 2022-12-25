@@ -1,7 +1,7 @@
-(use srfi-1)  ; first, second, etc.
-(use srfi-27) ; random-integer
-(use srfi-42) ; list-ec, do-ec
 (use gauche.collection) ; find-max
+(use scheme.list)       ; first, second, etc.
+(use srfi.27)           ; random-integer
+(use srfi.42)           ; list-ec, do-ec
 
 
 (define *num-players* 2)
@@ -36,9 +36,9 @@
   (list player
         board
         (add-passing-move board
-                          player 
-                          spare-dice 
-                          first-move 
+                          player
+                          spare-dice
+                          first-move
                           (attacking-moves board player spare-dice))))
 
 (define (add-passing-move board player spare-dice first-move moves)
@@ -47,7 +47,7 @@
     (cons (list #f
                 (game-tree (add-new-dice board player (- spare-dice 1))
                            (mod (+ player 1) *num-players*)
-                           0 
+                           0
                            #t))
           moves)))
 
@@ -63,7 +63,7 @@
                                    (> (dice src) (dice dst)))
                             `(((,src ,dst)
                                ,(game-tree (board-attack board cur-player src dst (dice src))
-                                           cur-player 
+                                           cur-player
                                            (+ spare-dice (dice dst))
                                            #f)))
                             '()))
@@ -93,7 +93,7 @@
           [else (let ([cur-player (caar lst)]
                       [cur-dice (cadar lst)])
                   (if (and (eq? cur-player player) (< cur-dice *max-dice*))
-                    (cons (list cur-player (+ cur-dice 1)) 
+                    (cons (list cur-player (+ cur-dice 1))
                           (f (cdr lst) (- n 1)))
                     (cons (car lst) (f (cdr lst) n))))]))
   (board-array (f (vector->list board) spare-dice)))
@@ -219,9 +219,8 @@
                       [cur-dice (cadar lst)])
                   (if (and (eq? cur-player player)
                            (< cur-dice *max-dice*))
-                    (f (cdr lst) 
+                    (f (cdr lst)
                        (- n 1)
                        (cons (list cur-player (+ cur-dice 1)) acc))
                     (f (cdr lst) n (cons (car lst) acc))))]))
   (board-array (f (vector->list board) spare-dice '())))
-

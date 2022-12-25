@@ -1,6 +1,6 @@
-(use srfi-1)   ;lset-intersection etc.
-(use srfi-27)  ;random-integer
-(use srfi-42)  ;list-ec etc.
+(use scheme.list)   ;lset-intersection etc.
+(use srfi.27)  ;random-integer
+(use srfi.42)  ;list-ec etc.
 (load "./graph-util")
 
 
@@ -144,7 +144,7 @@
                (append n '(*))
                n))
            (list node '?)))
-       (delete-duplicates 
+       (delete-duplicates
         (append *visited-nodes*
                 (append-map (cut neighbors <> *congestion-city-edges*)
                             *visited-nodes*)))))
@@ -195,4 +195,3 @@
                       (display "You ran into a Glow Worm Gang! You're now at ")
                       (display new-pos)
                       (handle-new-place '() new-pos #f))])))
-

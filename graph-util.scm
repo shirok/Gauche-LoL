@@ -1,6 +1,6 @@
 (use gauche.sequence)
 (use gauche.process)
-(use srfi-1)
+(use scheme.list)
 
 (define *wizard-nodes* '((living-room
                           (you are in the living-room.
@@ -12,7 +12,7 @@
                           (you are in the attic.
                            there is a giant welding torch in the corner.))))
 
-(define *wizard-edges* '((living-room (garden west door)  
+(define *wizard-edges* '((living-room (garden west door)
                                       (attic upstairs ladder))
                          (garden (living-room east door))
                          (attic (living-room downstairs ladder))))
@@ -69,7 +69,7 @@
                        (display (dot-label (cdr edge)))
                        (display "\"];"))))
                  edges))
-  
+
 (define (ugraph->dot nodes edges)
   (display "graph{")
   (nodes->dot nodes)
